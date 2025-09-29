@@ -6,30 +6,29 @@ import java.math.BigDecimal;
  * Representa um ativo financeiro do usuário.
  */
 public class Ativo {
-
-    private String id;
+    private String idAtivo;
     private String descricao;
     private BigDecimal valor;
-    private String usuarioId;
+    private String idUsuario;
 
     public Ativo() {
     }
 
-    public Ativo(String id, String descricao, BigDecimal valor, String usuarioId) {
-        this.id = id;
+    public Ativo(String idAtivo, String descricao, BigDecimal valor, String idUsuario) {
+        this.idAtivo = idAtivo;
         this.descricao = descricao;
         this.valor = valor;
-        this.usuarioId = usuarioId;
+        this.idUsuario = idUsuario;
     }
 
     // --- Getters e Setters ---
 
-    public String getId() {
-        return id;
+    public String getIdAtivo() {
+        return idAtivo;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdAtivo(String idAtivo) {
+        this.idAtivo = idAtivo;
     }
 
     public String getDescricao() {
@@ -48,7 +47,7 @@ public class Ativo {
         this.valor = valor;
     }
 
-    public String getUsuarioId() { return usuarioId; }
+    public String getIdUsuario() { return idUsuario; }
 
-    public void setUsuarioId(String usuarioId) { this.usuarioId = usuarioId; }
+    public void setIdUsuario(String idUsuario) { this.idUsuario = idUsuario; }
 }

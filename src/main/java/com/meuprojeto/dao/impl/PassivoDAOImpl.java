@@ -1,6 +1,7 @@
-package com.meuprojeto.dao;
+package com.meuprojeto.dao.impl;
 
 import com.meuprojeto.conexao.ConexaoMySQL;
+import com.meuprojeto.dao.PassivoDAO;
 import com.meuprojeto.modelo.Passivo;
 
 import java.sql.*;
@@ -8,44 +9,44 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class PassivoDAO {
+public class PassivoDAOImpl implements PassivoDAO {
 
-    // --- CREATE ---
-    public void adicionarPassivo(Passivo passivo) {
-        String sql = "INSERT INTO Passivo (id, descricao, valor, usuario_id) VALUES (?, ?, ?, ?)";
+    @Override
+    public void adicionar(Passivo passivo) {
+        String sql = "INSERT INTO Passivo (id_passivo, descricao, valor, id_usuario) VALUES (?, ?, ?, ?)";
         try (Connection conn = ConexaoMySQL.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            if (passivo.getId() == null) {
-                passivo.setId(UUID.randomUUID().toString());
+            if (passivo.getIdPassivo() == null) {
+                passivo.setIdPassivo(UUID.randomUUID().toString());
             }
 
-            stmt.setString(1, passivo.getId());
+            stmt.setString(1, passivo.getIdPassivo());
             stmt.setString(2, passivo.getDescricao());
             stmt.setBigDecimal(3, passivo.getValor());
-            stmt.setString(4, passivo.getUsuarioId());
+            stmt.setString(4, passivo.getIdUsuario());
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Em um projeto real, trate essa exceção de forma mais robusta
         }
     }
 
-    // --- READ ---
-    public List<Passivo> listarPassivosPorUsuario(String usuarioId) {
+    @Override
+    public List<Passivo> listarPorUsuario(String idUsuario) {
         List<Passivo> passivos = new ArrayList<>();
-        String sql = "SELECT * FROM Passivo WHERE usuario_id = ?";
+        String sql = "SELECT * FROM Passivo WHERE id_usuario = ?";
         try (Connection conn = ConexaoMySQL.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, usuarioId);
+            stmt.setString(1, idUsuario);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Passivo passivo = new Passivo();
-                passivo.setId(rs.getString("id"));
+                passivo.setIdPassivo(rs.getString("id_passivo"));
                 passivo.setDescricao(rs.getString("descricao"));
                 passivo.setValor(rs.getBigDecimal("valor"));
-                passivo.setUsuarioId(rs.getString("usuario_id"));
+                passivo.setIdUsuario(rs.getString("id_usuario"));
                 passivos.add(passivo);
             }
         } catch (SQLException e) {
@@ -54,8 +55,9 @@ public class PassivoDAO {
         return passivos;
     }
 
-    public Passivo buscarPassivoPorId(String id) {
-        String sql = "SELECT * FROM Passivo WHERE id = ?";
+    @Override
+    public Passivo buscarPorId(String id) {
+        String sql = "SELECT * FROM Passivo WHERE id_passivo = ?";
         try (Connection conn = ConexaoMySQL.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -64,10 +66,10 @@ public class PassivoDAO {
 
             if (rs.next()) {
                 Passivo passivo = new Passivo();
-                passivo.setId(rs.getString("id"));
+                passivo.setIdPassivo(rs.getString("id_passivo"));
                 passivo.setDescricao(rs.getString("descricao"));
                 passivo.setValor(rs.getBigDecimal("valor"));
-                passivo.setUsuarioId(rs.getString("usuario_id"));
+                passivo.setIdUsuario(rs.getString("id_usuario"));
                 return passivo;
             }
         } catch (SQLException e) {
@@ -76,24 +78,24 @@ public class PassivoDAO {
         return null;
     }
 
-    // --- UPDATE ---
-    public void atualizarPassivo(Passivo passivo) {
-        String sql = "UPDATE Passivo SET descricao = ?, valor = ? WHERE id = ?";
+    @Override
+    public void atualizar(Passivo passivo) {
+        String sql = "UPDATE Passivo SET descricao = ?, valor = ? WHERE id_passivo = ?";
         try (Connection conn = ConexaoMySQL.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, passivo.getDescricao());
             stmt.setBigDecimal(2, passivo.getValor());
-            stmt.setString(3, passivo.getId());
+            stmt.setString(3, passivo.getIdPassivo());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    // --- DELETE ---
-    public void deletarPassivo(String id) {
-        String sql = "DELETE FROM Passivo WHERE id = ?";
+    @Override
+    public void deletar(String id) {
+        String sql = "DELETE FROM Passivo WHERE id_passivo = ?";
         try (Connection conn = ConexaoMySQL.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 

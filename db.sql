@@ -13,7 +13,7 @@ create table if not exists Ativo (
     descricao varchar(255) not null,
     valor decimal(15, 2) not null,
     id_usuario varchar(36) not null,
-    foreign key (id_usuario) references Usuario(id) on delete cascade
+    foreign key (id_usuario) references Usuario(id_usuario) on delete cascade
 );
 
 create table if not exists Passivo (
@@ -21,33 +21,33 @@ create table if not exists Passivo (
     descricao varchar(255) not null,
     valor decimal(15, 2) not null,
     id_usuario varchar(36) not null,
-    foreign key (id_usuario) references Usuario(id) on delete cascade
+    foreign key (id_usuario) references Usuario(id_usuario) on delete cascade
 );
 
 create table if not exists Orcamento (
     id_orcamento varchar(36) primary key,
-    mes INT not null,
-    ano INT not null,
+    mes int not null,
+    ano int not null,
     id_usuario varchar(36) not null,
-    foreign key (id_usuario) references Usuario(id) on delete cascade,
-    unique(mes, ano, id_usuario) --faz com que só exista um roçamento por mes
+    foreign key (id_usuario) references Usuario(id_usuario) on delete cascade,
+    unique(mes, ano, id_usuario) -- Garante que só exista um orçamento por mês/ano para cada usuário
 );
 
 create table if not exists CategoriaOrcamento (
     id_categoria varchar(36) primary key,
     nome varchar(100) not null,
     valor_planejado decimal(15, 2) not null,
-    valor_realizado decimal(15, 2) DEFAULT 0.00,
+    valor_realizado decimal(15, 2) default 0.00,
     id_orcamento varchar(36) not null,
-    foreign key (id_orcamento) references Orcamento(id) on delete cascade
+    foreign key (id_orcamento) references Orcamento(id_orcamento) on delete cascade
 );
 
 create table if not exists Historico (
     id_historico varchar(36) primary key,
-    mes INT not null,
-    ano INT not null,
+    mes int not null,
+    ano int not null,
     patrimonio_liquido decimal(15, 2) not null,
     id_usuario varchar(36) not null,
-    foreign key (id_usuario) references Usuario(id) on delete cascade,
+    foreign key (id_usuario) references Usuario(id_usuario) on delete cascade,
     unique(mes, ano, id_usuario)
 );

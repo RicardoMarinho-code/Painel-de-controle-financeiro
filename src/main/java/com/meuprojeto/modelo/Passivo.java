@@ -3,30 +3,29 @@ package com.meuprojeto.modelo;
 import java.math.BigDecimal;
 
 public class Passivo {
-
-    private String id;
+    private String idPassivo;
     private String descricao;
     private BigDecimal valor;
-    private String usuarioId;
+    private String idUsuario;
 
     public Passivo() {
     }
 
-    public Passivo(String id, String descricao, BigDecimal valor, String usuarioId) {
-        this.id = id;
+    public Passivo(String idPassivo, String descricao, BigDecimal valor, String idUsuario) {
+        this.idPassivo = idPassivo;
         this.descricao = descricao;
         this.valor = valor;
-        this.usuarioId = usuarioId;
+        this.idUsuario = idUsuario;
     }
 
     // --- Getters e Setters ---
 
-    public String getId() {
-        return id;
+    public String getIdPassivo() {
+        return idPassivo;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdPassivo(String idPassivo) {
+        this.idPassivo = idPassivo;
     }
 
     public String getDescricao() {
@@ -45,7 +44,7 @@ public class Passivo {
         this.valor = valor;
     }
 
-    public String getUsuarioId() { return usuarioId; }
+    public String getIdUsuario() { return idUsuario; }
 
-    public void setUsuarioId(String usuarioId) { this.usuarioId = usuarioId; }
+    public void setIdUsuario(String idUsuario) { this.idUsuario = idUsuario; }
 }
