@@ -52,7 +52,7 @@ public class Main {
         System.out.println("Ativo '" + novoAtivo.getDescricao() + "' adicionado com sucesso!");
 
 
-        // // Mostra a listagem final dos itens do usuário
+        // Mostra a listagem final dos itens do usuário
         System.out.println("\n--- LISTANDO ITENS DO USUÁRIO ---");
 
         // Serve para listar todos os Passivos do usuário

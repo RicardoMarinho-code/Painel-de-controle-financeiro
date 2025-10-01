@@ -19,7 +19,6 @@ public class Passivo {
     }
 
     // --- Getters e Setters ---
-
     public String getIdPassivo() {
         return idPassivo;
     }
