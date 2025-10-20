@@ -1,8 +1,8 @@
-package meudb.top.ecommerce.DAO;
+package meudb.top.financeiro.DAO;
 import java.sql.*;
 
 public class ConexaoMySQL implements InterfaceConexao {
-        private  static  final  String url = "jdbc:mysql://localhost:3307/ecommerce";
+        private  static  final  String url = "jdbc:mysql://localhost:3307/sistema_financeiro";
         private  static  final  String Usuario = "root";
         private  static  final  String Senha = "db_senha";
 
@@ -33,5 +33,3 @@ public class ConexaoMySQL implements InterfaceConexao {
         }
 
 }
-
-

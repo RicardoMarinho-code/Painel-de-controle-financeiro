@@ -1,4 +1,4 @@
-package meudb.top.ecommerce.DAO;
+package meudb.top.financeiro.DAO;
 import java.sql.*;
 public interface InterfaceConexao {
     Connection conectar();
