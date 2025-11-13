@@ -1,11 +1,11 @@
 package meudb.top.financeiro.DAO;
 
-import meudb.top.financeiro.MODEL.Usuario;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.UUID;
+
+import meudb.top.financeiro.MODEL.Usuario;
 
 public class UsuarioDAO {
     private final InterfaceConexao conexao;

@@ -32,9 +32,7 @@ public class Main {
 
     // usa um ID de usuário fixo.
     private static final String ID_USUARIO_LOGADO = "1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p";
-    // Você deve inserir um usuário com este ID no seu banco manualmente
-    // INSERT INTO Usuario (id_usuario, nome, email, senha) VALUES ('1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p', 'Usuario Teste', 'teste@email.com', '123');
-
+    
     public static void main(String[] args) {
         System.out.println("Bem-vindo ao Painel de Controle Financeiro!");
 
@@ -53,21 +51,21 @@ public class Main {
                     menuEvolucaoFinanceira(); // Agora implementado
                     break;
                 case 0:
-                    System.out.println("Saindo do sistema. Até logo!");
+                    System.out.println("Saindo do sistema. Ate logo!");
                     return;
                 default:
-                    System.out.println("Opção inválida. Tente novamente.");
+                    System.out.println("Opcao invalida. Tente novamente.");
             }
         }
     }
 
     private static void exibirMenuPrincipal() {
         System.out.println("\n--- MENU PRINCIPAL ---");
-        System.out.println("1. Gerenciar Balanço Patrimonial (Módulo 1)");
-        System.out.println("2. Gerenciar Orçamento Mensal (Módulo 2)");
-        System.out.println("3. Ver Evolução Financeira (Módulo 3)");
+        System.out.println("1. Gerenciar Balanco Patrimonial");
+        System.out.println("2. Gerenciar Orcamento Mensal");
+        System.out.println("3. Ver Evolucao Financeira");
         System.out.println("0. Sair");
-        System.out.print("Escolha uma opção: ");
+        System.out.print("Escolha uma opcao: ");
     }
 
     // --- MÓDULO 1: BALANÇO PATRIMONIAL ---
@@ -85,7 +83,7 @@ public class Main {
             System.out.println("5. Atualizar Passivo");
             System.out.println("6. Deletar Passivo");
             System.out.println("0. Voltar ao Menu Principal");
-            System.out.print("Escolha uma opção: ");
+            System.out.print("Escolha uma opcao: ");
 
             int escolha = lerOpcao();
             scanner.nextLine(); // Consumir nova linha
@@ -98,7 +96,7 @@ public class Main {
                 case 5: atualizarPassivo(); break;
                 case 6: deletarPassivo(); break;
                 case 0: return;
-                default: System.out.println("Opção inválida.");
+                default: System.out.println("Opcao inválida.");
             }
         }
     }
@@ -150,7 +148,7 @@ public class Main {
         System.out.println("\n-----------------------------------------");
         System.out.printf("Total de Ativos: R$ %.2f\n", totalAtivos);
         System.out.printf("Total de Passivos: R$ %.2f\n", totalPassivos);
-        System.out.printf("PATRIMÔNIO LÍQUIDO: R$ %.2f\n", patrimonioLiquido);
+        System.out.printf("PATRIMONIO LIQUIDO: R$ %.2f\n", patrimonioLiquido);
         System.out.println("-----------------------------------------");
     }
 
@@ -221,7 +219,7 @@ public class Main {
     // F2.1: Seleção e Criação de Orçamento [cite: 32, 33]
     private static void menuOrcamentoMensal() {
         System.out.println("\n--- ORÇAMENTO MENSAL ---");
-        System.out.print("Digite o Mês (1-12): ");
+        System.out.print("Digite o Mes (1-12): ");
         int mes = lerOpcao();
         System.out.print("Digite o Ano (ex: 2025): ");
         int ano = lerOpcao();
@@ -229,16 +227,16 @@ public class Main {
 
         Orcamento orcamento = orcamentoDAO.buscarOuCriarOrcamento(mes, ano, ID_USUARIO_LOGADO);
         if (orcamento == null) {
-            System.out.println("Não foi possível carregar ou criar o orçamento.");
+            System.out.println("Nao foi possível carregar ou criar o orcamento.");
             return;
         }
 
-        System.out.printf("Gerenciando Orçamento de %d/%d\n", mes, ano);
+        System.out.printf("Gerenciando Orcamento de %d/%d\n", mes, ano);
 
         // F2.4: Utilitário de Cópia [cite: 42, 43]
         List<CategoriaOrcamento> categorias = categoriaDAO.listarCategoriasPorOrcamento(orcamento.getId());
         if (categorias.isEmpty()) {
-            System.out.print("Orçamento vazio. Deseja copiar o plano do mês anterior? (S/N): ");
+            System.out.print("Orçamento vazio. Deseja copiar o plano do mes anterior? (S/N): ");
             String copiar = scanner.nextLine();
             if (copiar.equalsIgnoreCase("S")) {
                 LocalDate dataAnterior = LocalDate.of(ano, mes, 1).minusMonths(1);
@@ -246,7 +244,7 @@ public class Main {
                 if (orcamentoAnterior != null) {
                     orcamentoDAO.copiarPlanoMesAnterior(orcamento, orcamentoAnterior, categoriaDAO);
                 } else {
-                    System.out.println("Nenhum orçamento encontrado para o mês anterior.");
+                    System.out.println("Nenhum orcamento encontrado para o mes anterior.");
                 }
             }
         }
@@ -260,7 +258,7 @@ public class Main {
             System.out.println("3. Registrar Valor Realizado"); // [cite: 38]
             System.out.println("4. Deletar Categoria");
             System.out.println("0. Voltar ao Menu Principal");
-            System.out.print("Escolha uma opção: ");
+            System.out.print("Escolha uma opcao: ");
 
             int escolha = lerOpcao();
             scanner.nextLine(); // Consumir nova linha
@@ -327,7 +325,7 @@ public class Main {
         }
 
         if (categoria == null) {
-            System.out.println("Categoria não encontrada.");
+            System.out.println("Categoria nao encontrada.");
             return;
         }
 
@@ -357,13 +355,13 @@ public class Main {
     // --- MÓDULO 3: EVOLUÇÃO FINANCEIRA ---
     
     private static void menuEvolucaoFinanceira() {
-        System.out.println("\n--- EVOLUÇÃO FINANCEIRA ---");
+        System.out.println("\n--- EVOLUCAO FINANCEIRA ---");
 
         while (true) {
-            System.out.println("\n1. Visualizar Histórico de Patrimônio"); // [cite: 49]
-            System.out.println("2. Salvar Patrimônio do Mês Atual (\"Fechar Mês\")"); // [cite: 46]
+            System.out.println("\n1. Visualizar Historico de Patrimonio"); // [cite: 49]
+            System.out.println("2. Salvar Patrimonio do Mes Atual (\"Fechar Mes\")"); // [cite: 46]
             System.out.println("0. Voltar ao Menu Principal");
-            System.out.print("Escolha uma opção: ");
+            System.out.print("Escolha uma opcao: ");
 
             int escolha = lerOpcao();
             scanner.nextLine(); // Consumir nova linha
@@ -372,7 +370,7 @@ public class Main {
                 case 1: visualizarHistorico(); break;
                 case 2: salvarPatrimonioAtual(); break;
                 case 0: return;
-                default: System.out.println("Opção inválida.");
+                default: System.out.println("Opcao invalida.");
             }
         }
     }
@@ -383,7 +381,7 @@ public class Main {
         if (historico.isEmpty()) {
             System.out.println("Nenhum registro histórico encontrado.");
         } else {
-            System.out.println("\n--- Histórico de Patrimônio Líquido ---");
+            System.out.println("\n--- Historico de Patrimonio Liquido ---");
             for (Historico h : historico) {
                 System.out.println(h); // toString() de Historico formata a saída
             }
@@ -392,7 +390,7 @@ public class Main {
 
     // F3.1: Registro do Histórico de Patrimônio [cite: 46]
     private static void salvarPatrimonioAtual() {
-        System.out.println("Calculando patrimônio líquido atual...");
+        System.out.println("Calculando patrimonio liquido atual...");
         BigDecimal totalAtivos = calcularTotalAtivos();
         BigDecimal totalPassivos = calcularTotalPassivos();
         BigDecimal patrimonioLiquido = totalAtivos.subtract(totalPassivos);
@@ -401,8 +399,8 @@ public class Main {
         int mes = hoje.getMonthValue();
         int ano = hoje.getYear();
 
-        System.out.printf("Patrimônio Líquido atual (Mês/Ano: %d/%d): R$ %.2f\n", mes, ano, patrimonioLiquido);
-        System.out.print("Deseja salvar/atualizar este valor no histórico? (S/N): ");
+        System.out.printf("Patrimonio Líquido atual (Mes/Ano: %d/%d): R$ %.2f\n", mes, ano, patrimonioLiquido);
+        System.out.print("Deseja salvar/atualizar este valor no historico? (S/N): ");
         String confirmar = scanner.nextLine();
 
         if (confirmar.equalsIgnoreCase("S")) {
