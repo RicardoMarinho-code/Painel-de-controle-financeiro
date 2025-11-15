@@ -45,10 +45,10 @@ public class Main {
                     menuBalancoPatrimonial();
                     break;
                 case 2:
-                    menuOrcamentoMensal(); // Agora implementado
+                    menuOrcamentoMensal();
                     break;
                 case 3:
-                    menuEvolucaoFinanceira(); // Agora implementado
+                    menuEvolucaoFinanceira();
                     break;
                 case 0:
                     System.out.println("Saindo do sistema. Ate logo!");
